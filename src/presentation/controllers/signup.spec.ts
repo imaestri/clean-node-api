@@ -16,3 +16,20 @@ describe('SignUp Controller', () => {
     expect(httpResponse.body).toEqual(new Error('No name provided'))
   })
 })
+
+describe('SignUp Controller', () => {
+  test('should return 400 if no email is provided ', () => {
+  // sut = system under test. Padrão para chamadas de classes instanciadas.
+    const sut = new SignUpController()
+    const httpRequest = {
+      body: {
+        name: 'any_name',
+        password: 'any_password',
+        passwordConfirmation: 'any_password'
+      }
+    }
+    const httpResponse = sut.handle(httpRequest)
+    expect(httpResponse.statusCode).toBe(400)
+    expect(httpResponse.body).toEqual(new Error('No email provided'))
+  })
+})
