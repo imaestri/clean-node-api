@@ -12,7 +12,7 @@ export default {
   collectCoverageFrom: ['<rootDir>/src/**/*.ts'],
 
   // The directory where Jest should output its coverage files
-  coverageDirectory: 'coverage',
+  // coverageDirectory: 'coverage',
   // A map from regular expressions to paths to transformers
   transform: {
     '.+||.ts$': 'ts-jest'
