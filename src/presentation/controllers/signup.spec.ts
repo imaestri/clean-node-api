@@ -6,13 +6,25 @@ interface SutTypes {
   emailValidatorStub: EmailValidator
 }
 
-const makeSut = (): SutTypes => {
+const makeEMailValidator = (): EmailValidator => {
   class EmailValidatorStub implements EmailValidator { // stub: test double
     isValid (email: string): boolean {
       return true // sempre iniciar como true para testes mockados. É uma boa prática para não influenciar nos demais testes.
     }
   }
-  const emailValidatorStub = new EmailValidatorStub()
+  return new EmailValidatorStub()
+}
+const makeEMailValidatorWithError = (): EmailValidator => {
+  class EmailValidatorStub implements EmailValidator {
+    isValid (email: string): boolean {
+      throw new Error()
+    }
+  }
+  return new EmailValidatorStub()
+}
+
+const makeSut = (): SutTypes => {
+  const emailValidatorStub = makeEMailValidator()
   const sut = new SignUpController(emailValidatorStub)
   return {
     sut,
@@ -107,12 +119,7 @@ describe('SignUp Controller', () => {
     expect(isValidSpy).toHaveBeenCalledWith('any_email@mail.com')
   })
   test('should return 500 if EmailValidator throws ', () => {
-    class EmailValidatorStub implements EmailValidator { // stub: test double
-      isValid (email: string): boolean {
-        throw new Error()
-      }
-    }
-    const emailValidatorStub = new EmailValidatorStub()
+    const emailValidatorStub = makeEMailValidatorWithError()
     const sut = new SignUpController(emailValidatorStub)
     const httpRequest = {
       body: {
