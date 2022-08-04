@@ -1,0 +1,10 @@
+// caminho onde vai ser gerado o código em JS. 
+{
+	"compilerOptions": {
+		"outDir": "./dist",
+		"module": "commonjs", // usamos para obter o modulo do JS. (Import/Export)
+		"target": "es2019", // versão JS
+		"esModuleInterop": true, // conversão de modulo
+		"allowJs": true
+	}
+}
