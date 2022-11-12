@@ -1,4 +1,4 @@
-// caminho onde vai ser gerado o código em JS. 
+// caminho onde vai ser gerado o código em JS.
 {
 	"compilerOptions": {
 		"outDir": "./dist",
